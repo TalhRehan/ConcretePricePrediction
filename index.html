@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Strength Predictive System</title>
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Include Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2b2f38; /* Dark background color */
+            color: #d1d4d9; /* Light gray text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #3e4551; /* Slightly lighter background for the container */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #f8b739; /* Accent color for headers */
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #d1d4d9; /* Light gray for label text */
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #505763; /* Medium gray background for inputs */
+            border: 2px solid #41474f; /* Subtle border color */
+            border-radius: 8px;
+            color: #ffffff; /* White text for contrast */
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #f8b739; /* Accent color on focus */
+            outline: none;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background-color: #f8b739; /* Accent color for buttons */
+            color: #fff; /* White text */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e19c34; /* Slightly darker accent color on hover */
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Adding a subtle animation */
+        .container {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #4b535e; /* Slightly darker background for result display */
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result h5,
+        .result p {
+            color: #f8b739; /* Accent color for result text */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-hard-hat"></i> Concrete Strength Prediction Model</h1>
+    <form action="/predict" method="post">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="cement">Cement (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="cement" name="cement" value="0.00" step="any" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="blastFurnace">Blast Furnace Slag (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="blastFurnace" name="blastFurnace" value="0.00" step="any" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="flyAsh">Fly Ash (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="flyAsh" name="flyAsh" value="0.00" step="any" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="water">Water (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="water" name="water" value="0.00" step="any" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="superplasticizer">Superplasticizer (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="superplasticizer" name="superplasticizer" value="0.00" step="any" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="courseAggregate">Coarse Aggregate (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="courseAggregate" name="courseAggregate" value="0.00" step="any" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="fineaggregate">Fine Aggregate (kg/m<sup>3</sup>)</label>
+                    <input type="number" class="form-control" id="fineaggregate" name="fineaggregate" value="0.00" step="any" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="age">Age (days)</label>
+                    <input type="number" class="form-control" id="age" name="age" value="0" step="any" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn"><i class="fas fa-calculator"></i> Get Strength</button>
+    </form>
+
+    <!-- Display the result -->
+    {% if strength %}
+<div class="result">
+    <h5 class="text-center" style="font-size: 24px; color: #f8b739; margin-bottom: 10px;">Concrete Strength</h5>
+    <p class="text-center" style="font-size: 32px; font-weight: bold; color: #ffffff;">Strength: {{strength}}</p>
+</div>
+{% endif %}
+</div>
+
+</body>
+
+</html>
